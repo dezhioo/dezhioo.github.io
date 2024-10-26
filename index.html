@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>welcome dezhio</title>
+    <title>Random Image Viewer</title>
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -15,9 +16,15 @@
             background-color: #f0f0f0;
         }
 
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+        }
+
         .button-container {
             text-align: center;
             width: 100%;
+            margin-top: 20px;
         }
 
         button {
@@ -36,17 +43,17 @@
             background-color: #45a049;
         }
 
-        img {
-            display: block;
-            margin: 20px auto;
+        .image-container {
             max-width: 80%;
-            height: auto;
+            margin: 20px auto;
+            overflow: hidden;
         }
 
-        h1 {
-            text-align: center;
-            color: #fff300;
-            font-size: 10rem;
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 1s ease-in-out;
         }
     </style>
     <script>
@@ -61,10 +68,14 @@
         }
 
         function changeImage() {
-            document.getElementById('displayedImage').src = getRandomImage();
+            var imgElement = document.getElementById('displayedImage');
+            imgElement.src = getRandomImage();
+            imgElement.style.transform = 'translateY(100%)';
+            setTimeout(function () {
+                imgElement.style.transform = 'translateY(0)';
+            }, 10);
         }
     </script>
-
 </head>
 
 <body>
@@ -72,7 +83,9 @@
     <div class="button-container">
         <button onclick="changeImage()">随机切换图片</button>
     </div>
-    <img id="displayedImage" src="img/1.png" alt="图片显示">
+    <div class="image-container">
+        <img id="displayedImage" src="img/1.png" alt="图片显示">
+    </div>
 </body>
 
 </html>
