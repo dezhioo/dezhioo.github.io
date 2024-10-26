@@ -18,6 +18,7 @@
 
         h1 {
             text-align: center;
+            color: #fff300;
             font-size: 3rem;
         }
 
@@ -47,13 +48,14 @@
             max-width: 80%;
             margin: 20px auto;
             overflow: hidden;
+            position: relative;
+            height: auto;
         }
 
         img {
             display: block;
             width: 100%;
             height: auto;
-            transition: transform 1s ease-in-out;
         }
     </style>
     <script>
@@ -61,7 +63,9 @@
             var images = [
                 'img/1.png', 'img/2.png', 'img/3.png',
                 'img/4.png', 'img/5.png', 'img/6.png',
-                'img/7.png', 'img/8.png', 'img/9.png'
+                'img/7.png', 'img/8.png', 'img/9.png',
+                'img/10.gif', 'img/11.gif', 'img/12.gif',
+                'img/13.gif'   // 新增的GIF图片
             ];
             var randomIndex = Math.floor(Math.random() * images.length);
             return images[randomIndex];
@@ -69,11 +73,14 @@
 
         function changeImage() {
             var imgElement = document.getElementById('displayedImage');
-            imgElement.src = getRandomImage();
-            imgElement.style.transform = 'translateY(100%)';
-            setTimeout(function () {
-                imgElement.style.transform = 'translateY(0)';
-            }, 10);
+            var newSrc = getRandomImage();
+            imgElement.src = newSrc + "?t=" + new Date().getTime(); // 添加时间戳
+
+            if (newSrc.endsWith(".gif")) {
+                setTimeout(function () {
+                    alert("恭喜你！中奖了！");
+                }, 500); // 延迟500毫秒显示弹窗
+            }
         }
     </script>
 </head>
